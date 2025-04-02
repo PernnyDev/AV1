@@ -6,6 +6,9 @@ exports.createClient = async (req, res) => {
         await Client.createClient({ name, email, phone });
         res.status(201).json({ message: 'Cliente criado com sucesso!' });
     } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+            return res.status(400).json({ error: 'E-mail já cadastrado. Use um e-mail único.' });
+        }
         console.error('Erro ao criar cliente:', error);
         res.status(500).json({ error: 'Erro ao criar cliente.' });
     }

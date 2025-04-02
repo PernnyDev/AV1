@@ -7,6 +7,9 @@ exports.createVehicle = async (req, res) => {
         await Vehicle.createVehicle({ brand, model, year, plate, available, price });
         res.status(201).json({ message: 'Veículo criado com sucesso!' });
     } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+            return res.status(400).json({ error: 'Placa já cadastrada. Use uma placa única.' });
+        }
         console.error('Erro ao criar veículo:', error);
         res.status(500).json({ error: 'Erro ao criar veículo.' });
     }
