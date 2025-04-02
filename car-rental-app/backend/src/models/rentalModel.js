@@ -1,42 +1,51 @@
 const db = require('../config/dbConfig');
 
-const Rental = {
-    getAllRentals: async () => {
-        const [rows] = await db.execute(`
-            SELECT rentals.*, 
-                   clients.name AS clientName, 
-                   vehicles.brand AS vehicleBrand, 
-                   vehicles.model AS vehicleModel
-            FROM rentals
-            JOIN clients ON rentals.clientId = clients.id
-            JOIN vehicles ON rentals.vehicleId = vehicles.id
-        `);
-        return rows;
-    },
-
-    createRental: async (rentalData) => {
-        const query = `
-            INSERT INTO rentals (clientId, vehicleId, startDate, endDate, totalPrice)
-            VALUES (?, ?, ?, ?, ?)
-        `;
-        const { clientId, vehicleId, startDate, endDate, totalPrice } = rentalData;
-        await db.execute(query, [clientId, vehicleId, startDate, endDate, totalPrice]);
-    },
-
-    updateRental: async (id, rentalData) => {
-        const query = `
-            UPDATE rentals
-            SET clientId = ?, vehicleId = ?, startDate = ?, endDate = ?, totalPrice = ?
-            WHERE id = ?
-        `;
-        const { clientId, vehicleId, startDate, endDate, totalPrice } = rentalData;
-        await db.execute(query, [clientId, vehicleId, startDate, endDate, totalPrice, id]);
-    },
-
-    deleteRental: async (id) => {
-        const query = 'DELETE FROM rentals WHERE id = ?';
-        await db.execute(query, [id]);
-    },
+exports.getAllRentals = async () => {
+    const [rows] = await db.execute(
+        `SELECT r.id, r.startDate, r.endDate, r.totalPrice, 
+                c.id AS clientId, c.name AS clientName, 
+                v.id AS vehicleId, v.brand AS vehicleBrand, v.model AS vehicleModel
+         FROM rentals r
+         JOIN clients c ON r.clientId = c.id
+         JOIN vehicles v ON r.vehicleId = v.id`
+    );
+    return rows;
 };
 
-module.exports = Rental;
+exports.getRentalsByClientId = async (clientId) => {
+    const [rows] = await db.execute(
+        `SELECT r.id, v.brand, v.model, r.startDate, r.endDate, r.totalPrice
+         FROM rentals r
+         JOIN vehicles v ON r.vehicleId = v.id
+         WHERE r.clientId = ?`,
+        [clientId]
+    );
+    return rows;
+};
+
+exports.createRental = async ({ clientId, vehicleId, startDate, endDate, totalPrice }) => {
+    const [result] = await db.execute(
+        `INSERT INTO rentals (clientId, vehicleId, startDate, endDate, totalPrice)
+         VALUES (?, ?, ?, ?, ?)`,
+        [clientId, vehicleId, startDate, endDate, totalPrice]
+    );
+    return result;
+};
+
+exports.updateRental = async (id, { clientId, vehicleId, startDate, endDate, totalPrice }) => {
+    const [result] = await db.execute(
+        `UPDATE rentals
+         SET clientId = ?, vehicleId = ?, startDate = ?, endDate = ?, totalPrice = ?
+         WHERE id = ?`,
+        [clientId, vehicleId, startDate, endDate, totalPrice, id]
+    );
+    return result;
+};
+
+exports.deleteRental = async (id) => {
+    const [result] = await db.execute(
+        `DELETE FROM rentals WHERE id = ?`,
+        [id]
+    );
+    return result;
+};

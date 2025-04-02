@@ -1,4 +1,5 @@
 const Client = require('../models/clientModel');
+const Rental = require('../models/rentalModel');
 
 exports.createClient = async (req, res) => {
     try {
@@ -56,5 +57,18 @@ exports.deleteClient = async (req, res) => {
     } catch (error) {
         console.error('Erro ao excluir cliente:', error);
         res.status(500).json({ error: 'Erro ao excluir cliente.' });
+    }
+};
+
+exports.getClientRentals = async (req, res) => {
+    try {
+        const { clientId } = req.params;
+        console.log(`Buscando histórico de locações para o cliente ID: ${clientId}`);
+        const rentals = await Rental.getRentalsByClientId(clientId);
+        console.log('Locações encontradas:', rentals);
+        res.json(rentals);
+    } catch (error) {
+        console.error('Erro ao buscar histórico de locações:', error);
+        res.status(500).json({ error: 'Erro ao buscar histórico de locações.' });
     }
 };

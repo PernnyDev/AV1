@@ -110,6 +110,14 @@ export const fetchClientsData = async () => {
     return response.json();
 };
 
+export const fetchClientRentals = async (clientId) => {
+    const response = await fetch(`http://localhost:5000/api/clients/${clientId}/rentals`);
+    if (!response.ok) {
+        throw new Error('Erro ao buscar histórico de locações do cliente');
+    }
+    return response.json();
+};
+
 // Funções para gerenciar locações
 export const getRentals = () => api.get('/rentals');
 export const getRentalById = (id) => api.get(`/rentals/${id}`);

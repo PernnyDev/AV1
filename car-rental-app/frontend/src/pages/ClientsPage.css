@@ -1,0 +1,59 @@
+.action-buttons {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+}
+
+.action-buttons button {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-buttons button:nth-child(1) {
+    background-color: #007bff; /* Cor do botão de editar */
+    color: white;
+}
+
+.action-buttons button:nth-child(2) {
+    background-color: #dc3545; /* Cor do botão de excluir */
+    color: white;
+}
+
+.action-buttons button:nth-child(3) {
+    background-color: #28a745; /* Cor do botão de histórico */
+    color: white;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.close-popup {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}

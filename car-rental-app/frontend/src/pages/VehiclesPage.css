@@ -1,0 +1,86 @@
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filters input,
+.filters select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.vehicle-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.vehicle-form input,
+.vehicle-form select,
+.vehicle-form button {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.vehicle-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.vehicle-form button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+table td .action-buttons {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+}
+
+table td button {
+    flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+table td button:hover {
+    opacity: 0.9; /* Efeito de hover para os botões */
+}
+
+table td button:nth-child(1) {
+    background-color: #007bff; /* Cor do botão de editar */
+    color: white;
+}
+
+table td button:nth-child(2) {
+    background-color: #dc3545; /* Cor do botão de excluir */
+    color: white;
+}

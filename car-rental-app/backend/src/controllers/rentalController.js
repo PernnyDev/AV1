@@ -4,12 +4,12 @@ const Rental = require('../models/rentalModel');
 
 exports.getAllRentals = async (req, res) => {
     try {
+        console.log('Buscando todas as locações...');
         const rentals = await Rental.getAllRentals();
-        console.log('Locações retornadas:', rentals);
         res.json(rentals);
     } catch (error) {
-        console.error('Erro ao obter locações:', error);
-        res.status(500).json({ error: 'Erro ao obter locações.' });
+        console.error('Erro ao buscar locações:', error);
+        res.status(500).json({ error: 'Erro ao buscar locações.' });
     }
 };
 
@@ -17,7 +17,6 @@ exports.createRental = async (req, res) => {
     try {
         const { clientId, vehicleId, startDate, endDate, totalPrice } = req.body;
 
-        // Validação básica
         if (!clientId || !vehicleId || !startDate || !endDate || !totalPrice) {
             return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
         }
@@ -49,7 +48,6 @@ exports.updateRental = async (req, res) => {
         const { id } = req.params;
         const { clientId, vehicleId, startDate, endDate, totalPrice } = req.body;
 
-        // Validação básica
         if (!clientId || !vehicleId || !startDate || !endDate || !totalPrice) {
             return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
         }

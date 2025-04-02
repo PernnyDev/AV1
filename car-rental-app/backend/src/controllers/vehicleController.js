@@ -18,11 +18,12 @@ exports.createVehicle = async (req, res) => {
 // Get all vehicles
 exports.getAllVehicles = async (req, res) => {
     try {
+        console.log('Buscando todos os veículos...');
         const vehicles = await Vehicle.getAllVehicles();
         res.json(vehicles);
     } catch (error) {
-        console.error('Erro ao obter veículos:', error);
-        res.status(500).json({ error: 'Erro ao obter veículos.' });
+        console.error('Erro ao buscar veículos:', error);
+        res.status(500).json({ error: 'Erro ao buscar veículos.' });
     }
 };
 

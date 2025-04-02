@@ -5,9 +5,9 @@ import './HomePage.css';
 
 const HomePage = () => {
     const [stats, setStats] = useState({
-        totalVehiclesAvailable: 0,
-        totalClients: 0,
-        totalActiveRentals: 0,
+        vehiclesAvailable: 0,
+        clientsRegistered: 0,
+        activeRentals: 0,
     });
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const HomePage = () => {
     return (
         <div className="home-container">
             <header className="home-header">
-                <h1>Bem-vindo ao Car Rental App</h1>
+                <h1>Dashboard</h1>
                 <p>Gerencie seus veículos, clientes e locações de forma eficiente.</p>
             </header>
             <section className="home-links">
@@ -39,15 +39,15 @@ const HomePage = () => {
                 <div className="stats-grid">
                     <div className="stat-card">
                         <h3>Veículos Disponíveis</h3>
-                        <p>{stats.totalVehiclesAvailable}</p>
+                        <p>{stats.vehiclesAvailable}</p>
                     </div>
                     <div className="stat-card">
                         <h3>Clientes Cadastrados</h3>
-                        <p>{stats.totalClients}</p>
+                        <p>{stats.clientsRegistered}</p>
                     </div>
                     <div className="stat-card">
                         <h3>Locações Ativas</h3>
-                        <p>{stats.totalActiveRentals}</p>
+                        <p>{stats.activeRentals}</p>
                     </div>
                 </div>
             </section>
